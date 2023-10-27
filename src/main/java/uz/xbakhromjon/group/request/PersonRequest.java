@@ -1,5 +1,6 @@
 package uz.xbakhromjon.group.request;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 @Getter
@@ -9,5 +10,8 @@ import lombok.*;
 @EqualsAndHashCode
 @ToString
 public class PersonRequest {
+    @NotBlank
     private String nickname;
+
+    private float givenMoney;
 }

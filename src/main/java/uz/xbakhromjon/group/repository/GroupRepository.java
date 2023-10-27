@@ -1,11 +1,19 @@
 package uz.xbakhromjon.group.repository;
 
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import uz.xbakhromjon.group.entity.GroupJpaEntity;
 
+import java.util.Optional;
+
 @Repository
 @Transactional
-public interface GroupRepository extends JpaRepository<GroupJpaEntity, Long> {
+public interface GroupRepository extends JpaRepository<GroupJpaEntity, Long>, JpaSpecificationExecutor<GroupJpaEntity> {
+    @EntityGraph(attributePaths = {"people"})
+    Optional<GroupJpaEntity> findWithPeopleById(Long id);
+
+    boolean existsByIdAndOwnerId(Long id, Long ownerId);
 }

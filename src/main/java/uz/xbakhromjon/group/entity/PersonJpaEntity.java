@@ -24,6 +24,11 @@ public class PersonJpaEntity {
     @Column(name = "nickname", nullable = false, columnDefinition = "varchar(20)")
     private String nickname;
 
+    @Column(name = "given_money")
+    private float givenMoney;
+
+    private transient float takenMoney;
+
     @Column(name = "is_deleted")
     private boolean isDeleted;
 
@@ -31,4 +36,5 @@ public class PersonJpaEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "group_id", nullable = false)
     private GroupJpaEntity group;
+
 }

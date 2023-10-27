@@ -21,6 +21,8 @@ import uz.xbakhromjon.group.response.DebtorPersonResponse;
 import uz.xbakhromjon.group.response.GroupResponse;
 import uz.xbakhromjon.group.service.GroupService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/groups")
 @RequiredArgsConstructor
@@ -72,6 +74,13 @@ public class GroupController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    @PatchMapping("/{id}/people/{personId}")
+    public ResponseEntity<GroupResponse> updateMoney(@PathVariable Long id, @PathVariable Long personId, @RequestBody PersonRequest request) {
+        groupService.updateGroupPerson(id, personId, request);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+
     @PostMapping("/{id}/expenses")
     public ResponseEntity<GroupResponse> addExpense(@PathVariable Long id, @RequestBody ExpenseRequest request) {
         groupService.addExpense(id, request);
@@ -79,8 +88,8 @@ public class GroupController {
     }
 
     @GetMapping("/{id}/transactions")
-    public ResponseEntity<Page<DebtorPersonResponse>> getGroupTransaction(@PathVariable Long id) {
-        Page<DebtorPersonResponse> response = groupService.getTransactions(id);
+    public ResponseEntity<List<DebtorPersonResponse>> getGroupTransaction(@PathVariable Long id) {
+        List<DebtorPersonResponse> response = groupService.getTransactions(id);
         return ResponseEntity.ok(response);
     }
 }

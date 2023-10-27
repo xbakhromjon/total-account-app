@@ -9,6 +9,7 @@ import org.hibernate.annotations.Where;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @EqualsAndHashCode
 @ToString
 @Entity
@@ -37,4 +38,11 @@ public class UserJpaEntity {
 
     @Column(name = "is_deleted")
     private boolean isDeleted;
+
+    public UserJpaEntity(String username, String password, String firstName, String lastName) {
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
 }

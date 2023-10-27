@@ -7,4 +7,5 @@ import lombok.NoArgsConstructor;
 public final class ErrorMessages {
 
     public static final String X_RESOURCE_NOT_FOUND = "%s resource not found";
+    public static final String INVALID_X_ID = "invalid %s id";
 }
