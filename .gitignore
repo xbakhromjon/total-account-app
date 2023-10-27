@@ -161,3 +161,7 @@ fabric.properties
 
 /.idea/encodings.xml
 /.idea/uiDesigner.xml
+/.idea/.gitignore
+/.idea/misc.xml
+/.idea/vcs.xml
+/.idea/dataSources.xml

@@ -1,7 +1,6 @@
 1. Auth
     - signup(username, password, firstname, lastname)
     - sign-in(username, password)
-    - sign-out
 2. Group
     - create(name) (groupID)
     - update(name) (groupID)

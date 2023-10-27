@@ -1,4 +1,4 @@
-package uz.xbakhromjon;
+package uz.xbakhromjon.utils;
 
 import lombok.*;
 
