@@ -1,0 +1,7 @@
+1. Define entity models (User, Group, Person, Expense)
+2. Define repositories
+3. Define response and request models
+4. Define mappers
+5. Define interface services
+6. Define controllers
+7. Impl services

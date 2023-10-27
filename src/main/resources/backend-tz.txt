@@ -1,0 +1,15 @@
+1. Auth
+    - signup(username, password, firstname, lastname)
+    - sign-in(username, password)
+    - sign-out
+2. Group
+    - create(name) (groupID)
+    - update(name) (groupID)
+    - getOne(groupID) (name, peopleCount, totalMoney)
+    - deleteOne(groupID)
+    - filter(name, groupID, sort, direction) (List(name, peopleCount, totalMoney))
+    - add person(nickname, groupID) personID
+    - add money to person(amount, personID)
+    - add expense(groupID, name, amount)
+    - get transactions(groupID)
+
