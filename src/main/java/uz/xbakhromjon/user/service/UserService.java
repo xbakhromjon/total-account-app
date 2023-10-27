@@ -15,5 +15,5 @@ public interface UserService {
 
     UserResponse getOne(Long id);
 
-    void changePassword(UserChangePasswordRequest request);
+    void changePassword(Long id, UserChangePasswordRequest request);
 }

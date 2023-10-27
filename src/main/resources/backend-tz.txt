@@ -6,7 +6,7 @@
     - update(name) (groupID)
     - getOne(groupID) (name, peopleCount, totalMoney)
     - deleteOne(groupID)
-    - filter(name, groupID, sort, direction) (List(name, peopleCount, totalMoney))
+    - filter(name, sort, direction) (List(name, peopleCount, totalMoney))
     - add person(nickname, groupID) personID
     - add money to person(amount, personID)
     - add expense(groupID, name, amount)
