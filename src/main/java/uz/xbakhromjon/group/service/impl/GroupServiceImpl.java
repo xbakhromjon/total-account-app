@@ -111,7 +111,6 @@ public class GroupServiceImpl implements GroupService {
 
     }
 
-    // TODO: 10/27/2023 test qilish kk
 
     @Override
     public List<DebtorPersonResponse> getTransactions(Long groupId) {
@@ -197,10 +196,16 @@ public class GroupServiceImpl implements GroupService {
         }
     }
 
+//    private GroupJpaEntity getWithPeopleOrThrowById(Long groupId) {
+//        return groupRepository.findWithPeopleById(groupId).
+//                orElseThrow(() -> new ResourceNotFoundException(ErrorMessages.X_RESOURCE_NOT_FOUND.formatted(ResourceNames.GROUP)));
+//    }
+
     private GroupJpaEntity getOrThrowById(Long groupId) {
         return groupRepository.findById(groupId).
                 orElseThrow(() -> new ResourceNotFoundException(ErrorMessages.X_RESOURCE_NOT_FOUND.formatted(ResourceNames.GROUP)));
     }
+
 
     private boolean isPersonBelongGroup(Long personId, Long groupId) {
         return personService.existsByIdAndGroupId(personId, groupId);
