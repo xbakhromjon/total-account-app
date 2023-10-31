@@ -18,6 +18,8 @@ import uz.xbakhromjon.auth.response.JWTToken;
 import uz.xbakhromjon.auth.security.DomainUserDetailsService;
 import uz.xbakhromjon.auth.security.ERole;
 import uz.xbakhromjon.auth.service.AuthService;
+import uz.xbakhromjon.common.constants.ErrorMessages;
+import uz.xbakhromjon.common.exception.BadRequestException;
 import uz.xbakhromjon.common.exception.UsernameAlreadyUsedException;
 import uz.xbakhromjon.user.entity.UserJpaEntity;
 import uz.xbakhromjon.user.entity.UserRole;
@@ -47,14 +49,12 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public JWTToken signIn(SignInRequest request) {
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-                request.getUsername(),
-                request.getPassword()
-        );
-
         org.springframework.security.core.userdetails.User userDetails = userDetailsService.createSpringSecurityUser(userRepository.findOneByUsername(request.getUsername()).get());
+        if (!passwordEncoder.matches(request.getPassword(), userDetails.getPassword())) {
+            throw new BadRequestException(ErrorMessages.USERNAME_OR_PASSWORD_INVALID);
+        }
         UsernamePasswordAuthenticationToken authentication =
-                new UsernamePasswordAuthenticationToken(authenticationToken,
+                new UsernamePasswordAuthenticationToken(userDetails,
                         userDetails.getPassword(),
                         userDetails.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authentication);
