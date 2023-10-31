@@ -27,5 +27,5 @@ public interface PersonRepository extends JpaRepository<PersonJpaEntity, Long> {
     @Query(nativeQuery = true, value = """
             select sum(given_money) from person where not is_deleted and id = :groupId group by group_id
             """)
-    float getTotalMoneyOfGroup(@Param(value = "groupId") Long groupId);
+    Float getTotalMoneyOfGroup(@Param(value = "groupId") Long groupId);
 }

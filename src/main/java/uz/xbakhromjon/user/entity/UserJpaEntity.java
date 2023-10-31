@@ -30,19 +30,26 @@ public class UserJpaEntity {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "first_name", nullable = false)
-    private String firstName;
+    @Column(name = "firstname", nullable = false)
+    private String firstname;
 
-    @Column(name = "last_name", nullable = false)
-    private String lastName;
+    @Column(name = "lastname", nullable = false)
+    private String lastname;
 
     @Column(name = "is_deleted")
     private boolean isDeleted;
 
-    public UserJpaEntity(String username, String password, String firstName, String lastName) {
+    @ToString.Exclude
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(nullable = false)
+    private UserRole role;
+
+
+    public UserJpaEntity(String username, String password, String firstname, String lastname, UserRole role) {
         this.username = username;
         this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.role = role;
     }
 }

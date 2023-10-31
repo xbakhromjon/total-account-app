@@ -53,8 +53,8 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     public Long update(Long id, GroupRequest request) {
-        // find group id and currentUserId
-        GroupJpaEntity entity = getOrThrowById(id);
+        // find by group id and currentUserId
+        GroupJpaEntity entity = getOrThrowByIdAndOwnerId(id, SecurityUtils.getCurrentUserId());
         // partial map request to entity
         groupMapper.partialMap(entity, request);
         // save entity
@@ -64,19 +64,15 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     public void delete(Long id) {
-        // check group exists
-        throwIfGroupNotExists(id);
-        // delete
-        groupRepository.deleteById(id);
+        // delete by group Id and currentUserId
+        groupRepository.deleteByIdAndOwnerId(id, SecurityUtils.getCurrentUserId());
     }
 
     // TODO: 10/27/2023 people qo'shilib chiqmayapti.
     @Override
     public GroupResponse getOne(Long id) {
-        // check current user is owner of group
-        throwIfUserNotOwner(SecurityUtils.getCurrentUserId(), id);
-        // find group
-        GroupJpaEntity entity = getOrThrowById(id);
+        // find by groupId and currentUserId
+        GroupJpaEntity entity = getOrThrowByIdAndOwnerId(id, SecurityUtils.getCurrentUserId());
         return groupMapper.toResponse(entity);
     }
 
@@ -185,7 +181,7 @@ public class GroupServiceImpl implements GroupService {
     }
 
     private void throwIfUserNotOwner(Long userId, Long groupId) {
-        if (!groupRepository.existsByIdAndOwnerId(groupId, userId)) {
+        if (!groupRepository.existsByIdAndNotExistsByIdAndOwnerId(groupId, userId)) {
             throw new AccessDeniedException(ErrorMessages.X_RESOURCE_NOT_FOUND.formatted(ResourceNames.GROUP));
         }
     }
@@ -196,13 +192,8 @@ public class GroupServiceImpl implements GroupService {
         }
     }
 
-//    private GroupJpaEntity getWithPeopleOrThrowById(Long groupId) {
-//        return groupRepository.findWithPeopleById(groupId).
-//                orElseThrow(() -> new ResourceNotFoundException(ErrorMessages.X_RESOURCE_NOT_FOUND.formatted(ResourceNames.GROUP)));
-//    }
-
-    private GroupJpaEntity getOrThrowById(Long groupId) {
-        return groupRepository.findById(groupId).
+    private GroupJpaEntity getOrThrowByIdAndOwnerId(Long groupId, Long ownerId) {
+        return groupRepository.findByIdAndOwnerId(groupId, ownerId).
                 orElseThrow(() -> new ResourceNotFoundException(ErrorMessages.X_RESOURCE_NOT_FOUND.formatted(ResourceNames.GROUP)));
     }
 

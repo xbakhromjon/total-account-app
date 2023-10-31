@@ -5,7 +5,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+import uz.xbakhromjon.auth.security.ERole;
 import uz.xbakhromjon.user.entity.UserJpaEntity;
+import uz.xbakhromjon.user.entity.UserRole;
 import uz.xbakhromjon.user.repository.UserRepository;
 
 @Component
@@ -19,7 +21,8 @@ public class InitialData implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         if (ddl.contains("create")) {
-            userRepository.save(new UserJpaEntity("xbakhromjon", "$2a$12$lhpAGGMJzqPP1AOHqbYGL.ypq64USxh9tD0og4uKW.twuFLdyLV9q", "Bahromjon", "Xasanboyev"));
+            userRepository.save(new UserJpaEntity("xbakhromjon", "$2a$12$fN8F12PeGom1VClzLs1vH.Un2Ff.DsFcyJMSNOLZ.eS5PmdIo8gku",
+                    "Bahromjon", "Xasanboyev", new UserRole(ERole.ROLE_USER)));
         }
     }
 }

@@ -12,7 +12,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import uz.xbakhromjon.auth.security.AuthoritiesConstants;
 import uz.xbakhromjon.group.entity.GroupJpaEntity;
 import uz.xbakhromjon.group.request.ExpenseRequest;
 import uz.xbakhromjon.group.request.GroupRequest;
@@ -30,6 +32,7 @@ public class GroupController {
     private final GroupService groupService;
 
     @PostMapping()
+    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.CREATE_ANNOUNCEMENT + "\")")
     public ResponseEntity<Long> create(@RequestBody @Valid GroupRequest request) {
         Long response = groupService.create(request);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
