@@ -1,19 +1,19 @@
 spring:
-  datasource:
-    url: jdbc:postgresql://localhost:5432/total_account_dup
-    username: postgres
-    password: 123
-  jpa:
-    hibernate:
-      ddl-auto: create
-    properties:
-      hibernate:
-      dialect: org.hibernate.dialect.PostgreSQL81Dialect
+#  datasource:
+#    url: jdbc:postgresql://localhost:5432/total_account
+#    username: postgres
+#    password: 123
+#  jpa:
+#    hibernate:
+#      ddl-auto: create
+#    properties:
+#      hibernate:
+#      dialect: org.hibernate.dialect.PostgreSQL81Dialect
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
   liquibase:
-    enabled: false
+    enabled: true
     change-log: classpath:config/liquibase/master.xml
 server:
   port: 8080

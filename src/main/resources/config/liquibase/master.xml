@@ -9,5 +9,5 @@
     <property name="blobType" value="blob" dbms="postgresql"/>
     <property name="uuidType" value="uuid" dbms="postgresql"/>
     <property name="datetimeType" value="datetime" dbms="postgresql"/>
-
+    <include file="classpath:\config\liquibase\changelog\initial_changelog.sql" relativeToChangelogFile="false"/>
 </databaseChangeLog>

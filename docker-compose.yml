@@ -1,0 +1,32 @@
+version: '3.1'
+
+services:
+  app:
+    image: 'total-account-image:latest'
+    build:
+      context: .
+    container_name: app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/total_account_db
+      - SPRING_DATASOURCE_USERNAME=admin
+      - SPRING_DATASOURCE_PASSWORD=admin
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=none
+    networks: {spring-cloud-network}
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: admin
+      POSTGRES_USER: admin
+      POSTGRES_DB: total_account_db
+    ports:
+      - "5432:5432"
+    networks: {spring-cloud-network}
+
+networks:
+  spring-cloud-network:
+    driver: bridge

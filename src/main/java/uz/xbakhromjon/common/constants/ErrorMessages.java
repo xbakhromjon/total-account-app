@@ -11,4 +11,5 @@ public final class ErrorMessages {
     public static final String INVALID_PASSWORD = "Incorrect password";
     public static final String USERNAME_ALREADY_TAKEN = "Login name already used!";
     public static final String UNAUTHORIZED = "unauthorized";
+    public static final String USERNAME_OR_PASSWORD_INVALID = "username/password is incorrect";
 }
