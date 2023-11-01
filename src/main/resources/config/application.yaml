@@ -1,14 +1,14 @@
 spring:
-#  datasource:
-#    url: jdbc:postgresql://localhost:5432/total_account
-#    username: postgres
-#    password: 123
-#  jpa:
-#    hibernate:
-#      ddl-auto: create
-#    properties:
-#      hibernate:
-#      dialect: org.hibernate.dialect.PostgreSQL81Dialect
+  datasource:
+    url: jdbc:postgresql://localhost:5432/total_account_db
+    username: vobkent_u
+    password: 585%LaEa0w%y
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+      dialect: org.hibernate.dialect.PostgreSQL81Dialect
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
